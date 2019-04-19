@@ -469,31 +469,6 @@
               <FilePath>.\uart_configs.h</FilePath>
             </File>
             <File>
-              <FileName>stepper.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\stepper.h</FilePath>
-            </File>
-            <File>
-              <FileName>stepper.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\stepper.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer_configs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\timer_configs.h</FilePath>
-            </File>
-            <File>
-              <FileName>time_and_down.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\time_and_down.c</FilePath>
-            </File>
-            <File>
-              <FileName>time_and_down.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\time_and_down.h</FilePath>
-            </File>
-            <File>
               <FileName>cmd.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\cmd.c</FilePath>
@@ -522,16 +497,6 @@
               <FileName>touch.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\touch.h</FilePath>
-            </File>
-            <File>
-              <FileName>seven_segment.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\seven_segment.c</FilePath>
-            </File>
-            <File>
-              <FileName>seven_segment.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\seven_segment.h</FilePath>
             </File>
           </Files>
         </Group>
