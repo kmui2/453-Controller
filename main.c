@@ -1,13 +1,14 @@
 /* DriverLib Includes */
 #include "debug.h"
 #include "driverlib.h"
-#include "touch.h"
 
 /* Standard Includes */
 #include <stdint.h>
 
 #include <stdbool.h>
 #include <string.h>
+
+#include "touch.h"
 
 int main(void)
 {
@@ -34,13 +35,15 @@ int main(void)
 		/////////////////
 		// Inputs
 		/////////////////
-    initTouch();
-
+		initTouch();
+		
     /* Enabling SRAM Bank Retention */
     SysCtl_enableSRAMBankRetention(SYSCTL_SRAM_BANK1);
     
     /* Enabling MASTER interrupts */
     Interrupt_enableMaster();
+		
+		pollTouch();
 
     /* Going to LPM3 */
     while (1)
