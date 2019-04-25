@@ -41,9 +41,6 @@
 // Definitions
 //
 //*****************************************************************************
-#define SLAVE_ADDRESS 0x12
-
-#define DETECTION_STATUS_REG 4
 
 #define TOUCH_PORT GPIO_PORT_P10
 #define TOUCH_SDA GPIO_PIN2
@@ -81,7 +78,7 @@ volatile eUSCI_I2C_MasterConfig i2cConfig =
 {
         EUSCI_B_I2C_CLOCKSOURCE_SMCLK,          // SMCLK Clock Source
 		0,
-		EUSCI_B_I2C_SET_DATA_RATE_100KBPS,                                  // Desired I2C Clock of 20khz
+		EUSCI_B_I2C_SET_DATA_RATE_100KBPS,                                  // Desired I2C Clock of 20khz (set in functions below)
         0,                                      // No byte counter threshold
         EUSCI_B_I2C_SEND_STOP_AUTOMATICALLY_ON_BYTECOUNT_THRESHOLD                // Autostop
 };
@@ -110,7 +107,7 @@ volatile eUSCI_I2C_MasterConfig i2cConfig =
 void initI2C(void)
 {
 	/* I2C Clock Soruce Speed */
-	i2cConfig.i2cClk = MAP_CS_getSMCLK();
+	i2cConfig.i2cClk = CS_getSMCLK();
 
     /* Select I2C function for I2C_SCL & I2C_SDA */
     GPIO_setAsPeripheralModuleFunctionOutputPin(TOUCH_PORT, TOUCH_SDA | TOUCH_SCL,
@@ -126,7 +123,7 @@ void initI2C(void)
 bool writeI2C(uint8_t ui8Addr, uint8_t ui8Reg, uint8_t *Data, uint8_t ui8ByteCount)
 {
 	/* Wait until ready to write */
-    while (MAP_I2C_isBusBusy(TOUCH_EUSCI_BASE)){
+    while (I2C_isBusBusy(TOUCH_EUSCI_BASE)){
         ;
     }
 
@@ -216,27 +213,27 @@ bool readI2C(uint8_t ui8Addr, uint8_t ui8Reg, uint8_t *Data, uint8_t ui8ByteCoun
     MAP_I2C_enableInterrupt(TOUCH_EUSCI_BASE, EUSCI_B_I2C_STOP_INTERRUPT +
     		EUSCI_B_I2C_NAK_INTERRUPT);
 
-    /* Set our local state to Busy */
-    ui8Status = eUSCI_BUSY;
+    // /* Set our local state to Busy */
+    // ui8Status = eUSCI_BUSY;
 
-  	/* Send start bit and register */
-  	MAP_I2C_masterSendMultiByteStart(TOUCH_EUSCI_BASE,ui8Reg);
+  	// /* Send start bit and register */
+  	// MAP_I2C_masterSendMultiByteStart(TOUCH_EUSCI_BASE,ui8Reg);
 
   	/* Enable master interrupt for the remaining data */
     MAP_Interrupt_enableInterrupt(TOUCH_INT);
 
-  	/* NOTE: If the number of bytes to receive = 1, then as target register is being shifted
-  	 * out during the write phase, UCBxTBCNT will be counted and will trigger STOP bit prematurely
-  	 * If count is > 1, wait for the next TXBUF empty interrupt (just after reg value has been
-  	 * shifted out
-  	 */
-	while(ui8Status == eUSCI_BUSY)
-	{
-		if(MAP_I2C_getInterruptStatus(TOUCH_EUSCI_BASE, TOUCH_TRANSMIT_INTERRUPT))
-		{
-			ui8Status = eUSCI_IDLE;
-		}
-	}
+  	// /* NOTE: If the number of bytes to receive = 1, then as target register is being shifted
+  	//  * out during the write phase, UCBxTBCNT will be counted and will trigger STOP bit prematurely
+  	//  * If count is > 1, wait for the next TXBUF empty interrupt (just after reg value has been
+  	//  * shifted out
+  	//  */
+	// while(ui8Status == eUSCI_BUSY)
+	// {
+	// 	if(MAP_I2C_getInterruptStatus(TOUCH_EUSCI_BASE, TOUCH_TRANSMIT_INTERRUPT))
+	// 	{
+	// 		ui8Status = eUSCI_IDLE;
+	// 	}
+	// }
 
 	ui8Status = eUSCI_BUSY;
 
