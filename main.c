@@ -15,7 +15,8 @@ int main(void)
     volatile uint32_t ii;
 
     /* Halting the Watchdog */
-    WDT_A_holdTimer();
+
+	WDT_A_holdTimer();
 	
 	
     /* Setting DCO to 12MHz */

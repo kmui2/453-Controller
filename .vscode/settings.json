@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		".stylelintrc": "json",
+		".env.dev": "shellscript",
+		"stdio.h": "c"
+	}
+}
