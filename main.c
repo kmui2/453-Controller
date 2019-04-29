@@ -40,7 +40,7 @@ int main(void)
 		
     /* Enabling SRAM Bank Retention */
     SysCtl_enableSRAMBankRetention(SYSCTL_SRAM_BANK1);
-    
+    //Interrupt_enableSleepOnIsrExit();
     /* Enabling MASTER interrupts */
     Interrupt_enableMaster();
 		
