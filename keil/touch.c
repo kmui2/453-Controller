@@ -48,8 +48,8 @@ void pollTouch(void)
 		char zero = 0;
 		char one = 1;
 		char two = 2;
+		char three = 3;
 		char four = 4;
-		char eight = 8;
 		char last_pressed = zero;
 				int i = 0;
     success = writeI2C(SLAVE_ADDRESS, DETECTION_STATUS_REG, &detection_status, 0);
@@ -59,6 +59,7 @@ void pollTouch(void)
 		char message[100];
         //__delay_cycles(300000); // ~100ms pause between transmissions
         success = readI2C(SLAVE_ADDRESS, DETECTION_STATUS_REG, &detection_status, 1);
+
         Timer_A_clearInterruptFlag(TIMER_A0_BASE);
 
         GPIO_setOutputLowOnPin(LED_PORT, LED0_PIN);
@@ -85,16 +86,16 @@ void pollTouch(void)
         } else if (detection_status == 0xe)
         {
             GPIO_setOutputHighOnPin(LED_PORT, LED3_PIN);
-						if (last_pressed != four) {
-							printDebug(&four);
-							last_pressed = four;
+						if (last_pressed != three) {
+							printDebug(&three);
+							last_pressed = three;
 						}
         } else if (detection_status == 0x8)
         {
             GPIO_setOutputHighOnPin(LED_PORT, LED2_PIN);
-						if (last_pressed != eight) {
-							printDebug(&eight);
-							last_pressed = eight;
+						if (last_pressed != four) {
+							printDebug(&four);
+							last_pressed = four;
 						}
         } else {
 						if (last_pressed != zero) {
