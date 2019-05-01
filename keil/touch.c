@@ -67,7 +67,7 @@ void pollTouch(void)
         GPIO_setOutputLowOnPin(LED_PORT, LED2_PIN);
         GPIO_setOutputLowOnPin(LED_PORT, LED3_PIN);
 			
-				for (i = 0; i < 3000; i++);
+				for (i = 0; i < 30000; i++);
 
         if (detection_status == 0x1)
         {
@@ -76,14 +76,14 @@ void pollTouch(void)
 							printDebug(&one);
 							last_pressed = one;
 						};
-        } else if (detection_status == 0x7)
+        } else if (detection_status == 0x2)
         {
             GPIO_setOutputHighOnPin(LED_PORT, LED1_PIN);
 						if (last_pressed != two) {
 							printDebug(&two);
 							last_pressed = two;
 						}
-        } else if (detection_status == 0xe)
+        } else if (detection_status == 0x4)
         {
             GPIO_setOutputHighOnPin(LED_PORT, LED3_PIN);
 						if (last_pressed != three) {

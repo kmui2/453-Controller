@@ -17,6 +17,8 @@ int main(void)
     /* Halting the Watchdog */
 
 	WDT_A_holdTimer();
+
+	
 	
 	
     /* Setting DCO to 12MHz */
